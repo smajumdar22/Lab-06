@@ -23,15 +23,15 @@ Node, npm and Express
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 -->
 
-Number and name of feature: ________________________________
+Number and name of feature: _____Setup Repo___________________________
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: ___30 mins__
 
-Start time: _____
+Start time: _12:30____
 
-Finish time: _____
+Finish time: _1:00____
 
-Actual time needed to complete: _____
+Actual time needed to complete: _30 mins____
 
 Number and name of feature: ________________________________
 
