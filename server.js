@@ -50,10 +50,15 @@ app.get('/location', (request, response) => {
 //API routes
 app.get('/weather', (request, response) => {
   try {
+    const weatherArr = [];
     const darkSkyData = require('./data/darksky.json');
-    const weatherData = new Weather(darkSkyData);
-    console.log('weatherData ', weatherData);
-    response.send(weatherData);
+    // const weatherData = new Weather(darkSkyData);
+    // console.log('weatherData ', weatherData);
+    // response.send(weatherData);
+    darkSkyData.daily.data.forEach( day => {
+      weatherArr.push(new Weather(day.summary, new Date(day.time)));
+    });
+    response.send(weatherArr);
   }
   catch (error) {
     //some function or error message
@@ -70,23 +75,23 @@ function Location(city, geoData) {
 }
 
 //Helper Funcitons
-function Weather(darkSkyData) {
-  this.forecast = darkSkyData.currently.summary;
-  this.time = timeChange(darkSkyData.currently.time);
+function Weather(forecast, time) {
+  this.forecast = forecast;
+  this.time = time;
 }
 
-function timeChange(UNIX_timestamp){
-  let a = new Date(UNIX_timestamp * 1000);
-  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  let days = ['Monday','Tuesday','Wednesday',
-    'Thursday','Friday','Saturday','Sunday'];
-  let year = a.getFullYear();
-  let month = months[a.getMonth()];
-  let date = a.getDate();
-  let day = days[a.getDay()];
-  let time = day + ' ' + date + ' ' + month + ' ' + year;
-  return time;
-}
+// function timeChange(UNIX_timestamp){
+//   let a = new Date(UNIX_timestamp * 1000);
+//   let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+//   let days = ['Monday','Tuesday','Wednesday',
+//     'Thursday','Friday','Saturday','Sunday'];
+//   let year = a.getFullYear();
+//   let month = months[a.getMonth()];
+//   let date = a.getDate();
+//   let day = days[a.getDay()];
+//   let time = day + ' ' + date + ' ' + month + ' ' + year;
+//   return time;
+// }
 function errorHandler(error, request, response) {
   response.status(500).send(error);
 }
