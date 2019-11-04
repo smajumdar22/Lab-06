@@ -28,9 +28,9 @@ function aboutUsHandler(request, response) {
   response.status(200).send('This is the About Us page .html');
 }
 
-app.get('*', (request, response) => {
-  response.status(404).send('This route does not exist')
-})
+// app.get('*', (request, response) => {
+//   response.status(404).send('This route does not exist');
+// });
 
 //API routes
 app.get('/location', (request, response) => {
@@ -71,8 +71,8 @@ function Location(city, geoData) {
 
 //Helper Funcitons
 function Weather(darkSkyData) {
-  this.forecast = darkSkyData.currently[0].summary;
-  this.time = timeChange(darkSkyData.currently[0].time);
+  this.forecast = darkSkyData.currently.summary;
+  this.time = timeChange(darkSkyData.currently.time);
 }
 
 function timeChange(UNIX_timestamp){
@@ -84,7 +84,7 @@ function timeChange(UNIX_timestamp){
   let month = months[a.getMonth()];
   let date = a.getDate();
   let day = days[a.getDay()];
-  let time = day+' '+ date + ' ' + month + ' ' + year;
+  let time = day + ' ' + date + ' ' + month + ' ' + year;
   return time;
 }
 function errorHandler(error, request, response) {
