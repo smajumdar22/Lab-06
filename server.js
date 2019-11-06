@@ -56,7 +56,7 @@ app.get('/weather', (request, response) => {
     // console.log('weatherData ', weatherData);
     // response.send(weatherData);
     darkSkyData.daily.data.forEach( day => {
-      weatherArr.push(new Weather(day.summary, new Date(day.time)));
+      weatherArr.push(new Weather(day.summary, new Date(day.time * 1000).toString().slice(0, 15)));
     });
     response.send(weatherArr);
   }
